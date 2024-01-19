@@ -1,0 +1,19 @@
+[package]
+name = "moa-dct-swap-abi"
+version = "0.0.0"
+authors = [ "you",]
+edition = "2018"
+publish = false
+
+[dev-dependencies]
+
+[dependencies.moa-dct-swap]
+path = ".."
+
+[dependencies.dharitri-wasm]
+version = "0.0.5"
+path = "../../../../dharitri-wasm"
+
+[dependencies.dharitri-wasm-debug]
+version = "0.0.5"
+path = "../../../../dharitri-wasm-debug"

@@ -1,0 +1,65 @@
+{
+    "name": "unwrap moa",
+    "steps": [
+        {
+            "step": "externalSteps",
+            "path": "wrap_moa.scen.json"
+        },
+        {
+            "step": "scCall",
+            "txId": "unwrap-moa",
+            "tx": {
+                "from": "address:user",
+                "to": "address:contract",
+                "value": "0",
+                "dctTokenName": "str:WMOA-abcdef",
+                "dctValue": "300",
+                "function": "unwrapMoa",
+                "arguments": [],
+                "gasLimit": "100,000,000",
+                "gasPrice": "0"
+            },
+            "expect": {
+                "status": "0",
+                "message": "",
+                "logs": [
+                    {
+                        "address": "address:contract",
+                        "identifier": "str:unwrap-moa",
+                        "topics": [
+                            "address:user"
+                        ],
+                        "data": "300"
+                    }
+                ],
+                "gas": "*",
+                "refund": "*"
+            }
+        },
+        {
+            "step": "checkState",
+            "accounts": {
+                "address:user": {
+                    "nonce": "2",
+                    "balance": "800",
+                    "dct": {
+                        "str:WMOA-abcdef": "200"
+                    },
+                    "storage": {}
+                },
+                "address:contract": {
+                    "nonce": "0",
+                    "balance": "200",
+                    "dct": {
+                        "str:WMOA-abcdef": "1800"
+                    },
+                    "storage": {
+                        "str:wrapped_moa_token_id": "str:WMOA-abcdef",
+                        "str:unused_wrapped_moa": "1800"
+                    },
+                    "code": "file:../output/moa-dct-swap.wasm"
+                }
+            }
+        }
+    ]
+}
